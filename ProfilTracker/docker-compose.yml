@@ -1,0 +1,16 @@
+# /Da/Project/ProfilTracker/docker-compose.yml
+
+version: '3.8'
+services:
+  api_francetravail:
+    build: 
+      context: ./services
+      dockerfile: api_francetravail/Dockerfile
+    ports:
+      - "8000:80"
+    environment:
+      - SERVICE_NAME=api_francetravail
+    volumes:
+      - ./services/api_francetravail:/code/api_francetravail/  # Montez le code source pour le développement
+      - ./services/common:/code/common/
+    command: uvicorn app:app --host 0.0.0.0 --port 80 --reload  # Utilisez --reload pour le développement
