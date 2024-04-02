@@ -10,10 +10,9 @@ def setup_logging(service_name):
 
     log_dir = Path(__file__).resolve().parent / "logs"
     log_dir.mkdir(parents=True, exist_ok=True)
-    log_file_path = (
-        log_dir / f"{service_name}_{datetime.datetime.now()
-                                    .strftime('%Y-%m-%d_%H-%M-%S')}.log"
-    )
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    log_filename = f"{service_name}_{timestamp}.log"
+    log_file_path = log_dir / log_filename
 
     handler = RotatingFileHandler(
         str(log_file_path), maxBytes=10000000, backupCount=5
